@@ -284,6 +284,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   capybara
+  cloudinary
   debug
   devise (~> 4.9)
   dotenv

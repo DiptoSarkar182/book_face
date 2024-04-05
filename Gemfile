@@ -67,5 +67,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
+gem 'cloudinary'
 gem 'paperclip-cloudinary'
 gem "devise", "~> 4.9"
