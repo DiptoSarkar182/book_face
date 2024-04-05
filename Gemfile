@@ -68,3 +68,4 @@ group :test do
 end
 
 gem 'paperclip-cloudinary'
+gem "devise", "~> 4.9"
