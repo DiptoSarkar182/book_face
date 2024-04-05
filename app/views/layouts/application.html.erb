@@ -31,6 +31,18 @@
       </div>
     <% end %>
   </div>
+  <% if alert || notice %>
+    <div >
+      <div >
+        <% if notice %>
+          <p  role="alert"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p  role="alert"><%= alert %></p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
     <%= yield %>
   </body>
 </html>
