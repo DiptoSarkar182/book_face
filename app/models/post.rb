@@ -7,6 +7,9 @@ class Post < ApplicationRecord
   private
 
   def purge_post_image
-    post_image.purge
+    if Rails.env.production?
+      public_id = "ruby_on_rails/book_face/#{post_image.key}"
+      Cloudinary::Api.delete_resources([public_id], type: :upload, resource_type: :image)
+    end
   end
 end
