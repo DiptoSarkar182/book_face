@@ -7,9 +7,11 @@
 <div title="<%= @post.created_at.strftime('%B %d, %Y %I:%M %p') %>">
   Posted <%= time_ago_in_words(@post.created_at) %> ago
 </div>
-<div>
-  <%= image_tag(@post.post_image) %>
-</div>
+<% if @post.post_image.present? %>
+  <div>
+    <%= image_tag(@post.post_image) %>
+  </div>
+<% end %>
 <% if @post.user == current_user %>
   <div>
     <%= link_to "Edit", edit_post_path(@post) %>
