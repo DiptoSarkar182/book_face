@@ -21,7 +21,7 @@ note.txt
 /tmp/pids/*
 !/tmp/pids/
 !/tmp/pids/.keep
-
+cloudinary.yml
 # Ignore storage (uploaded files in development and any SQLite databases).
 /storage/*
 !/storage/.keep
