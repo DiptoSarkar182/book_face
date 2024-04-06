@@ -1,0 +1,20 @@
+<%= form_with(model: [ @post, @comment ]) do |form| %>
+  <% if comment.errors.any? %>
+    <div  role="alert">
+      <h2 ><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+      <ul >
+        <% comment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.text_area :body, placeholder: "Add your comment here" %>
+  </div>
+
+  <div >
+    <%= form.submit  %>
+  </div>
+<% end %>

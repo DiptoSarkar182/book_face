@@ -6,6 +6,9 @@
   <div >
     <%= post.user.full_name %>
   </div>
+  <div title="<%= post.created_at.strftime('%B %d, %Y %I:%M %p') %>">
+    Posted <%= time_ago_in_words(post.created_at) %> ago
+  </div>
   <div >
     <%= image_tag(post.post_image) if post.post_image.attached? %>
   </div>

@@ -14,11 +14,11 @@
   <div>
     <%= form.text_area :body, placeholder: "What's on your mind #{current_user.full_name}?" %>
   </div>
-  <div>
+  <div >
+    <%= form.label :post_image, "Attach photo:" %>
     <%= form.file_field :post_image %>
   </div>
-
   <div >
-    <%= form.submit "Create post" %>
+    <%= form.submit  %>
   </div>
 <% end %>

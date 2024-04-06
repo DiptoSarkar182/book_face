@@ -9,4 +9,5 @@ class User < ApplicationRecord
   end
   validates :first_name, :last_name, presence: true, length: { minimum: 3 }
   has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 end

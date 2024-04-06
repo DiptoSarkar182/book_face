@@ -1,0 +1,31 @@
+<div>
+  <%= @post.body %>
+</div>
+<div >
+  <%= @post.user.full_name %>
+</div>
+<div title="<%= @post.created_at.strftime('%B %d, %Y %I:%M %p') %>">
+  Posted <%= time_ago_in_words(@post.created_at) %> ago
+</div>
+<div>
+  <%= image_tag(@post.post_image) %>
+</div>
+<% if @post.user == current_user %>
+  <div>
+    <%= link_to "Edit", edit_post_path(@post) %>
+  </div>
+  <div>
+    <%= link_to "Delete", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
+  </div>
+<% end %>
+<div>
+  Add your comment:
+</div>
+<div>
+  <%= render "comments/form",comment: @comment %>
+</div>
+<div>
+  <% @comments.each do |comment| %>
+    <%= render 'comments/comment', comment: comment %>
+  <% end %>
+</div>

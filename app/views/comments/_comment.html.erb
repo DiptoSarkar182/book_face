@@ -1,0 +1,17 @@
+<div>
+  <%= comment.user.full_name %> Commented:
+</div>
+<div>
+  <%= comment.body %>
+</div>
+<div title="<%= comment.created_at.strftime('%B %d, %Y %I:%M %p') %>">
+  Posted <%= time_ago_in_words(comment.created_at) %> ago
+</div>
+<% if comment.user == current_user %>
+  <div>
+    <%= link_to "Edit"%>
+  </div>
+  <div>
+    <%= link_to "Delete",  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
+  </div>
+<% end %>
