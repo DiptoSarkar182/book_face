@@ -9,9 +9,9 @@
 </div>
 <% if comment.user == current_user %>
   <div>
-    <%= link_to "Edit"%>
+    <%= link_to "Edit", edit_post_comment_path(comment.post, comment)%>
   </div>
   <div>
-    <%= link_to "Delete",  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
+    <%= link_to "Delete", post_comment_path(comment.post, comment),  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
   </div>
 <% end %>

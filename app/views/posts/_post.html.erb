@@ -3,14 +3,30 @@
   <div>
     <%= link_to post.body, post_path(post) %>
   </div>
-  <div >
-    <%= post.user.full_name %>
-  </div>
-  <div title="<%= post.created_at.strftime('%B %d, %Y %I:%M %p') %>">
-    Posted <%= time_ago_in_words(post.created_at) %> ago
+<!--  <div >-->
+    <%#= post.user.full_name %>
+<!--  </div>-->
+  <div>
+    Posted by
+    <span><%= post.user.full_name %></span>
+    <span title="<%= post.created_at.strftime('%B %d, %Y %I:%M %p') %>"><%= time_ago_in_words(post.created_at) %> ago</span>
   </div>
   <div >
     <%= image_tag(post.post_image) if post.post_image.attached? %>
+  </div>
+  <div>
+    <turbo-frame id="like_button">
+      <% if post.likers.exists?(current_user.id) %>
+        <%= button_to dislike_post_path(post), method: :post, class: "button_to" do %>
+          <%= image_tag("dislike.png", alt: "Dislike") %>
+        <% end %>
+      <% else %>
+        <%= button_to like_post_path(post), method: :post, class: "button_to" do %>
+          <%= image_tag("like.png", alt: "Like") %>
+        <% end %>
+      <% end %>
+      (<%= post.post_likes.count %>)
+    </turbo-frame>
   </div>
 
 </div>

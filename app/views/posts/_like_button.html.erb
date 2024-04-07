@@ -1,0 +1,14 @@
+<div>
+  <turbo-frame id="like_button">
+    <% if post.likers.exists?(current_user.id) %>
+      <%= button_to dislike_post_path(post), method: :post, class: "button_to" do %>
+        <%= image_tag("dislike.png", alt: "Dislike") %>
+      <% end %>
+    <% else %>
+      <%= button_to like_post_path(post), method: :post, class: "button_to" do %>
+        <%= image_tag("like.png", alt: "Like") %>
+      <% end %>
+    <% end %>
+    (<%= post.post_likes.count %>)
+  </turbo-frame>
+</div>

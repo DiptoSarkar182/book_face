@@ -12,6 +12,15 @@
     <%= image_tag(@post.post_image) %>
   </div>
 <% end %>
+<div>
+  <turbo-frame id="like_button">
+    <% if @post.likers.exists?(current_user.id) %>
+      <%= button_to "Dislike", dislike_post_path(@post), method: :post %>
+    <% else %>
+      <%= button_to "Like", like_post_path(@post), method: :post %>
+    <% end %>
+  </turbo-frame>
+</div>
 <% if @post.user == current_user %>
   <div>
     <%= link_to "Edit", edit_post_path(@post) %>
@@ -23,8 +32,28 @@
 <div>
   Add your comment:
 </div>
+
 <div>
-  <%= render "comments/form",comment: @comment %>
+  <%= form_with(model: [ @post, @comment ]) do |form| %>
+    <% if @comment.errors.any? %>
+      <div  role="alert">
+        <h2 ><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+        <ul >
+          <% @comment.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.text_area :body, placeholder: "Add your comment here" %>
+    </div>
+
+    <div >
+      <%= form.submit  %>
+    </div>
+  <% end %>
 </div>
 <div>
   <% @comments.each do |comment| %>
