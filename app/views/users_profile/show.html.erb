@@ -26,7 +26,9 @@
     Location: <%= current_user.location %>
   </div>
   <div>
-    Age: <%= ((Time.zone.now - current_user.birthday.to_time) / 1.year.seconds).floor %>
+    <% if current_user.birthday %>
+      Age: <%= ((Time.zone.now - current_user.birthday.to_time) / 1.year.seconds).floor %>
+    <% end %>
   </div>
 </div>
 
