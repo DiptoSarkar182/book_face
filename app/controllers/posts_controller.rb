@@ -41,17 +41,19 @@ class PostsController < ApplicationController
   end
   def like
     @post = Post.find(params[:id])
-    @post_like = @post.post_likes.new(user_id: current_user.id)
-    if @post_like.save
-      render partial: "like_button", locals: { post: @post }
-    else
-      redirect_to root_path, alert: 'Unable to like this post.'
+    unless @post.likers.exists?(current_user.id)
+      @post_like = @post.post_likes.new(user_id: current_user.id)
+      if @post_like.save
+        render partial: "like_button", locals: { post: @post }
+      else
+        redirect_to root_path, alert: 'Unable to like this post.'
+      end
     end
   end
   def dislike
     @post = Post.find(params[:id])
     @post_like = @post.post_likes.find_by(user_id: current_user.id)
-    if @post_like.destroy
+    if @post_like && @post_like.destroy
       render partial: "like_button", locals: { post: @post }
     else
       redirect_to root_path, alert: 'Unable to dislike this post.'

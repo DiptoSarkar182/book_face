@@ -1,0 +1,8 @@
+<div>
+  Responce your friend requests
+</div>
+<div>
+  <% @friend_requests.each do |friend_request| %>
+    <%= render 'notifications/friend_request', friend_request: friend_request %>
+  <% end %>
+</div>

@@ -70,3 +70,4 @@ end
 gem 'cloudinary'
 gem 'paperclip-cloudinary'
 gem "devise", "~> 4.9"
+

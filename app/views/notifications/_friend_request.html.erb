@@ -1,0 +1,9 @@
+<div>
+  <%= friend_request.sender.full_name %>
+</div>
+<div>
+  <%= button_to "Accept", accept_friend_request_path(friend_request.sender), method: :post %>
+</div>
+<div>
+  <%= button_to "Reject", reject_friend_request_path(friend_request.sender), method: :post %>
+</div>

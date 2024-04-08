@@ -1,12 +1,8 @@
 <hr>
 <div>
   <div>
-    <%= link_to post.body, post_path(post) %>
+    <%=  post.body %>
   </div>
-<!--  <div >-->
-    <%#= post.user.full_name %>
-<!--  </div>-->
-  <div>
     Posted by
     <span><%= post.user.full_name %></span>
     <span title="<%= post.created_at.strftime('%B %d, %Y %I:%M %p') %>"><%= time_ago_in_words(post.created_at) %> ago</span>

@@ -1,0 +1,11 @@
+<div>
+  <%= user.full_name %>
+</div>
+<div>
+  <% friend_request = current_user.sent_friend_requests.find_by(receiver: user) %>
+  <% if friend_request %>
+    <%= button_to "Cancel request", friend_request_path(friend_request), method: :delete %>
+  <% else %>
+    <%= button_to "Add friend", friend_requests_path(receiver_id: user.id), method: :post %>
+  <% end %>
+</div>

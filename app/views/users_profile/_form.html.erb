@@ -1,0 +1,42 @@
+<%= form_with(model: user, url: users_profile_path(user), method: :patch) do |form| %>
+  <% if user.errors.any? %>
+    <div  role="alert">
+      <h2 ><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul >
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div >
+    <%= form.label :profile_image, "Attach profile photo:" %>
+    <%= form.file_field :profile_image %>
+  </div>
+
+  <div>
+    <%= form.label :bio %>
+    <%= form.text_field :bio %>
+  </div>
+
+  <div>
+    <%= form.label :gender %>
+    <%= form.select :gender, ['Male', 'Female', 'Better not tell'], prompt: 'Select your gender' %>
+  </div>
+
+  <div>
+    <%= form.label :location %>
+    <%= form.text_field :location %>
+  </div>
+
+  <div>
+    <%= form.label :birthday %>
+    <%= form.date_field :birthday, start_year: Time.now.year - 100, end_year: Time.now.year, prompt: { day: 'Select day', month: 'Select month', year: 'Select year' } %>
+  </div>
+
+  <div >
+    <%= form.submit  "Update Profile"%>
+  </div>
+<% end %>

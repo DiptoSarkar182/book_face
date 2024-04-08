@@ -26,7 +26,16 @@
           <%= link_to "Edit account", edit_user_registration_path %>
         </div>
         <div>
-          <%= link_to "Profile" %>
+          <%= link_to "Profile", users_profile_path(current_user) %>
+        </div>
+        <div>
+          <%= link_to "Find Friends", friend_requests_path %>
+        </div>
+        <div>
+          <%= link_to "Notifications", notifications_path %>
+        </div>
+        <div>
+          <%= link_to "Friends List", friends_list_index_path %>
         </div>
         <%= button_to "Log Out", destroy_user_session_url, method: "delete" %>
       </div>

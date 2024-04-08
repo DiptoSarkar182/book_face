@@ -1,0 +1,39 @@
+<div>
+  <div>
+    <div>
+      <%= current_user.full_name %>'s Timeline
+    </div>
+    <% @user_posts.each do |post| %>
+      <%= render 'users_post', post: post %>
+    <% end %>
+  </div>
+</div>
+
+<div>
+  <div >
+    <%= image_tag(current_user.profile_image) if current_user.profile_image.attached? %>
+  </div>
+  <div >
+    <%= current_user.full_name %>
+  </div>
+  <div >
+    Bio: <%= current_user.bio %>
+  </div>
+  <div >
+   Gender: <%= current_user.gender %>
+  </div>
+  <div >
+    Location: <%= current_user.location %>
+  </div>
+  <div>
+    Age: <%= ((Time.zone.now - current_user.birthday.to_time) / 1.year.seconds).floor %>
+  </div>
+</div>
+
+<div>
+  <% if [current_user.bio, current_user.location, current_user.gender, current_user.birthday].any?(&:blank?) %>
+    <%= link_to "Finish Profile", edit_users_profile_path(current_user) %>
+  <% else %>
+    <%= link_to "Edit Profile", edit_users_profile_path(current_user) %>
+  <% end %>
+</div>

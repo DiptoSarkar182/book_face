@@ -1,0 +1,8 @@
+<div>
+  Find Friends
+</div>
+<div>
+  <% @users.each do |user| %>
+    <%= render 'user', user: user %>
+  <% end %>
+</div>
