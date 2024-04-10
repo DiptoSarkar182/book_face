@@ -1,3 +1,6 @@
 <div>
   <%= friend.full_name %>
 </div>
+<div>
+  <%= button_to "Unfriend", friends_list_path(friend), method: :delete %>
+</div>

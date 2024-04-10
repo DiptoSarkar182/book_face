@@ -8,26 +8,12 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-User.create!(
-  email: 'John@example.com',
-  password: '111111',
-  password_confirmation: '111111',
-  first_name: 'John',
-  last_name: 'Doe'
-)
-
-User.create!(
-  email: 'Jane@example.com',
-  password: '111111',
-  password_confirmation: '111111',
-  first_name: 'Jane',
-  last_name: 'Doe'
-)
-
-User.create!(
-  email: 'peter@example.com',
-  password: '111111',
-  password_confirmation: '111111',
-  first_name: 'Peter',
-  last_name: 'Parker'
-)
+30.times do
+  User.create!(
+    email: Faker::Internet.unique.email,
+    password: '111111',
+    password_confirmation: '111111',
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name
+  )
+end

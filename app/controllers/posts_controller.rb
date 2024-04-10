@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all.order('created_at DESC')
+    @posts = Post.where(user_id: [current_user.id, *current_user.friends.select(:id)]).order('created_at DESC')
   end
   def new
     @post = Post.new

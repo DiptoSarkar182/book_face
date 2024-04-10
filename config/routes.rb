@@ -14,12 +14,17 @@ Rails.application.routes.draw do
   end
 
   resources :users_profile, only: [:show, :update, :edit]
+
   resources :friend_requests do
     member do
       post :accept
       post :reject
     end
+    collection do
+      get :search_friend
+    end
   end
   resources :notifications
-  resources :friends_list, only: [:index]
+  resources :friends_list, only: [:index, :destroy]
+  # resources :search_friends, only: [:search]
 end

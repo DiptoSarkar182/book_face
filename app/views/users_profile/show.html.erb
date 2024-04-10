@@ -1,7 +1,7 @@
 <div>
   <div>
     <div>
-      <%= current_user.full_name %>'s Timeline
+      <%= @user.full_name %>'s Timeline
     </div>
     <% @user_posts.each do |post| %>
       <%= render 'users_post', post: post %>
@@ -11,31 +11,33 @@
 
 <div>
   <div >
-    <%= image_tag(current_user.profile_image) if current_user.profile_image.attached? %>
+    <%= image_tag(@user.profile_image.attached? ? @user.profile_image : 'default_pic.png') %>
   </div>
   <div >
-    <%= current_user.full_name %>
+    <%= @user.full_name %>
   </div>
   <div >
-    Bio: <%= current_user.bio %>
+    Bio: <%= @user.bio %>
   </div>
   <div >
-   Gender: <%= current_user.gender %>
+    Gender: <%= @user.gender %>
   </div>
   <div >
-    Location: <%= current_user.location %>
+    Location: <%= @user.location %>
   </div>
   <div>
-    <% if current_user.birthday %>
-      Age: <%= ((Time.zone.now - current_user.birthday.to_time) / 1.year.seconds).floor %>
+    <% if @user.birthday %>
+      Age: <%= ((Time.zone.now - @user.birthday.to_time) / 1.year.seconds).floor %>
     <% end %>
   </div>
 </div>
 
 <div>
-  <% if [current_user.bio, current_user.location, current_user.gender, current_user.birthday].any?(&:blank?) %>
-    <%= link_to "Finish Profile", edit_users_profile_path(current_user) %>
-  <% else %>
-    <%= link_to "Edit Profile", edit_users_profile_path(current_user) %>
+  <% if @user == current_user %>
+    <% if [@user.bio, @user.location, @user.gender, @user.birthday].any?(&:blank?) %>
+      <%= link_to "Finish Profile", edit_users_profile_path(@user) %>
+    <% else %>
+      <%= link_to "Edit Profile", edit_users_profile_path(@user) %>
+    <% end %>
   <% end %>
 </div>

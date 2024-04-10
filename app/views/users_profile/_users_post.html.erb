@@ -10,6 +10,14 @@
   <div >
     <%= image_tag(post.post_image) if post.post_image.attached? %>
   </div>
+<% if post.user == current_user %>
+  <div>
+    <%= link_to "Edit", edit_post_path(post) %>
+  </div>
+  <div>
+    <%= link_to "Delete", post_path(post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
+  </div>
+<% end %>
   <div>
     <turbo-frame id="like_button">
       <% if post.likers.exists?(current_user.id) %>

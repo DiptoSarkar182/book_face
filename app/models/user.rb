@@ -7,16 +7,17 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
   validates :first_name, :last_name, presence: true, length: { minimum: 3 }
   validate :birthday_must_be_at_least_one_year_in_the_past
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :post_likes, dependent: :destroy
   has_many :liked_posts, through: :post_likes, source: :post
-  has_many :friend_requests
+  has_many :friend_requests, dependent: :destroy
   has_many :sent_friend_requests, class_name: 'FriendRequest', foreign_key: 'sender_id'
   has_many :received_friend_requests, class_name: 'FriendRequest', foreign_key: 'receiver_id'
-  has_many :friend_lists
+  has_many :friend_lists, dependent: :destroy
   has_many :friends, through: :friend_lists
   has_one_attached :profile_image
 
