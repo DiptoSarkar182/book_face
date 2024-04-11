@@ -1,8 +1,9 @@
-<%= form_with(model: [post, comment]) do |form| %>
+<!-- view/comments/_form.html.erb -->
+<%= form_with(model: [post, comment], class: "space-y-4") do |form| %>
   <% if comment.errors.any? %>
-    <div  role="alert">
-      <h2 ><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-      <ul >
+    <div role="alert" class="bg-red-100 border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+      <h2 class="font-bold"><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+      <ul class="list-disc pl-5">
         <% comment.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,13 +12,13 @@
   <% end %>
 
   <div>
-    <%= form.text_area :body, placeholder: "Add your comment here" %>
+    <%= form.text_area :body, placeholder: "Add your comment here", class: "w-full h-24 p-2 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 text-lg" %>
   </div>
 
-  <div >
-    <%= form.submit  %>
+  <div>
+    <%= form.submit "Update Comment", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
   </div>
   <div>
-    <%= link_to "Back", post_path(post) %>
+    <%= link_to "Back", post_path(post), class: "text-blue-500 hover:text-blue-600" %>
   </div>
 <% end %>

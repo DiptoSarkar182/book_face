@@ -1,43 +1,37 @@
-<div>
-  <div>
-    <div>
-      <%= @user.full_name %>'s Timeline
+<div class="flex justify-between items-start mb-4">
+  <div class="bg-white shadow-md rounded-lg p-4 mr-6 w-1/4" id="this_one">
+    <div class="mb-4">
+      <%= image_tag(@user.profile_image.attached? ? @user.profile_image : 'default_pic.png', class: "w-32 h-32 object-cover rounded-full mx-auto") %>
     </div>
-    <% @user_posts.each do |post| %>
-      <%= render 'users_post', post: post %>
-    <% end %>
+    <div class="text-xl font-bold mb-2 text-center"><%= @user.full_name %></div>
+    <div class="mb-2">Bio: <%= @user.bio %></div>
+    <div class="mb-2">Gender: <%= @user.gender %></div>
+    <div class="mb-2">Location: <%= @user.location %></div>
+    <div class="mb-2">Member Since: <%= @user.created_at.strftime('%B %d, %Y') %></div>
+    <div class="mb-4">
+      <% if @user.birthday %>
+        Age: <%= ((Time.zone.now - @user.birthday.to_time) / 1.year.seconds).floor %>
+      <% end %>
+    </div>
+    <div class="flex justify-center items-center mb-4">
+      <% if @user == current_user %>
+        <% if [@user.bio, @user.location, @user.gender, @user.birthday].any?(&:blank?) %>
+          <%= link_to "Finish Profile", edit_users_profile_path(@user), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+        <% else %>
+          <%= link_to "Edit Profile", edit_users_profile_path(@user), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
 
-<div>
-  <div >
-    <%= image_tag(@user.profile_image.attached? ? @user.profile_image : 'default_pic.png') %>
+  <div class="flex-1">
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-2xl font-bold"><%= @user.full_name %>'s Timeline</h1>
+    </div>
+    <div class="space-y-8">
+      <% @user_posts.each do |post| %>
+        <%= render 'users_post', post: post %>
+      <% end %>
+    </div>
   </div>
-  <div >
-    <%= @user.full_name %>
-  </div>
-  <div >
-    Bio: <%= @user.bio %>
-  </div>
-  <div >
-    Gender: <%= @user.gender %>
-  </div>
-  <div >
-    Location: <%= @user.location %>
-  </div>
-  <div>
-    <% if @user.birthday %>
-      Age: <%= ((Time.zone.now - @user.birthday.to_time) / 1.year.seconds).floor %>
-    <% end %>
-  </div>
-</div>
-
-<div>
-  <% if @user == current_user %>
-    <% if [@user.bio, @user.location, @user.gender, @user.birthday].any?(&:blank?) %>
-      <%= link_to "Finish Profile", edit_users_profile_path(@user) %>
-    <% else %>
-      <%= link_to "Edit Profile", edit_users_profile_path(@user) %>
-    <% end %>
-  <% end %>
 </div>

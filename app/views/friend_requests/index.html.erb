@@ -1,37 +1,39 @@
-<div>
-  <%= form_with url: search_friend_friend_requests_path, method: :get  do |form| %>
-    <%= form.text_field :name, placeholder: "First/last/full name", required: true %>
-    <%= form.submit "Search" %>
+<!-- views/friend_request/index.html.erb -->
+<div class="bg-white shadow-md rounded-lg p-4 mb-6 w-3/4 mx-auto">
+  <%= form_with url: search_friend_friend_requests_path, method: :get, class: "flex items-center space-x-2 mb-4" do |form| %>
+    <%= form.text_field :name, placeholder: "First/last/full name", required: true, class: "w-full p-2 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 text-lg" %>
+    <%= form.submit "Search", class: "bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded text-lg cursor-pointer" %>
   <% end %>
-</div>
 
-<div>
   <% if flash[:search_message] %>
-    <p><%= flash[:search_message] %></p>
+    <p class="text-lg font-bold mb-2"><%= flash[:search_message] %></p>
     <% if @name_search_results %>
       <% @name_search_results.each do |user| %>
-        <p><%= link_to "#{user.first_name} #{user.last_name}", users_profile_path(user) %></p>
-        <% if user == current_user %>
-          <p>This is you.</p>
-        <% elsif current_user.friends.include?(user) %>
-          <p>This user is already in your friend list.</p>
-        <% else %>
-          <% friend_request = current_user.sent_friend_requests.find_by(receiver: user) %>
-          <% if friend_request %>
-            <%= button_to "Cancel request", friend_request_path(friend_request), method: :delete %>
+        <div class="border-b border-gray-200 py-4">
+          <p class="text-md mb-2"><%= link_to "#{user.first_name} #{user.last_name}", users_profile_path(user), class: "text-blue-500 hover:text-blue-600" %></p>
+          <% if user == current_user %>
+            <p>This is you.</p>
+          <% elsif current_user.friends.include?(user) %>
+            <p>This user is already in your friend list.</p>
           <% else %>
-            <%= button_to "Add friend", friend_requests_path(receiver_id: user.id), method: :post %>
+            <% sent_request = current_user.sent_friend_requests.find_by(receiver: user) %>
+            <% received_request = current_user.received_friend_requests.find_by(sender: user) %>
+            <% if sent_request %>
+              <%= button_to "Cancel request", friend_request_path(sent_request), method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded text-lg cursor-pointer" %>
+            <% elsif received_request %>
+              <p>User <%= user.full_name %> has already sent you a friend request. Please respond.</p>
+            <% else %>
+              <%= button_to "Add friend", friend_requests_path(receiver_id: user.id), method: :post, class: "bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded text-lg cursor-pointer" %>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       <% end %>
     <% end %>
   <% end %>
 </div>
 
-<div>
-  People You May Know
-</div>
-<div>
+<div class="bg-white shadow-md rounded-lg p-4 mb-6 w-3/4 mx-auto">
+  <h2 class="text-lg font-bold mb-4">People You May Know</h2>
   <% @users.each do |user| %>
     <%= render 'user', user: user %>
   <% end %>

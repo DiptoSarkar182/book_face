@@ -1,54 +1,59 @@
-<div>
-  <%= @post.body %>
-</div>
-<div >
-  <%= @post.user.full_name %>
-</div>
-<div title="<%= @post.created_at.strftime('%B %d, %Y %I:%M %p') %>">
-  Posted <%= time_ago_in_words(@post.created_at) %> ago
-</div>
-<% if @post.post_image.present? %>
-  <div>
-    <%= image_tag(@post.post_image) %>
+<div class="bg-white shadow-md rounded-lg p-4 mb-6 w-3/4 mx-auto">
+  <div class="flex items-center justify-between mb-2">
+    <div class="flex items-center justify-between mb-2">
+      <%= link_to users_profile_path(@post.user), class: "flex items-center space-x-2 hover:text-blue-500" do %>
+        <%= image_tag @post.user.profile_image, class: "w-8 h-8 rounded-full" %>
+        <span class="font-bold text-sm"><%= @post.user.full_name %></span>
+      <% end %>
+    </div>
+    <span title="<%= @post.created_at.strftime('%B %d, %Y %I:%M %p') %>" class="text-gray-500 text-xs">about <%= time_ago_in_words(@post.created_at) %> ago</span>
   </div>
-<% end %>
-<div>
-  <turbo-frame id="like_button">
-    <% if @post.likers.exists?(current_user.id) %>
-      <%= button_to dislike_post_path(@post), method: :post, class: "button_to" do %>
-        <%= image_tag("dislike.png", alt: "Dislike") %>
-      <% end %>
-    <% else %>
-      <%= button_to like_post_path(@post), method: :post, class: "button_to" do %>
-        <%= image_tag("like.png", alt: "Like") %>
-      <% end %>
+
+  <div class="mb-4">
+    <p class="text-md font-bold"><%= @post.body %></p>
+  </div>
+
+  <% if @post.post_image.attached? %>
+    <div class="mb-4">
+      <%= image_tag @post.post_image, class: "w-3/8 rounded-md mx-auto" %>
+    </div>
+  <% end %>
+
+  <div class="flex items-center justify-between">
+    <div class="flex items-center space-x-2">
+      <turbo-frame id="like_button">
+        <% if @post.likers.exists?(current_user.id) %>
+          <%= button_to dislike_post_path(@post), method: :post, class: "flex items-center space-x-2 text-gray-500 hover:text-red-500" do %>
+            <%= image_tag "dislike.png", alt: "Dislike", class: "h-5 w-5" %>
+            <span><%= @post.post_likes.count %></span>
+          <% end %>
+        <% else %>
+          <%= button_to like_post_path(@post), method: :post, class: "flex items-center space-x-2 text-gray-500 hover:text-blue-500" do %>
+            <%= image_tag "like.png", alt: "Like", class: "h-5 w-5" %>
+            <span><%= @post.post_likes.count %></span>
+          <% end %>
+        <% end %>
+      </turbo-frame>
+      <div class="flex items-center space-x-2 text-gray-500">
+        <%= image_tag "comment.png", alt: "comment", class: "h-5 w-5" %>
+        <span><%= @post.comments.count %> Comments</span>
+      </div>
+    </div>
+    <% if @post.user == current_user %>
+      <div class="flex items-center space-x-2">
+        <%= link_to "Edit", edit_post_path(@post), class: "text-blue-500 hover:text-blue-600" %>
+        <%= link_to "Delete", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-red-500 hover:text-red-600" %>
+      </div>
     <% end %>
-    (<%= @post.post_likes.count %>)
-  </turbo-frame>
-</div>
-<div>
-
-  <%= image_tag("comment.png", alt: "comment") %>
-  (<%= @post.comments.count %>)
-</div>
-<% if @post.user == current_user %>
-  <div>
-    <%= link_to "Edit", edit_post_path(@post) %>
   </div>
-  <div>
-    <%= link_to "Delete", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
-  </div>
-<% end %>
-<div>
-  Add your comment:
 </div>
 
-<div>
-  <%= form_with(model: [ @post, @comment ]) do |form| %>
+<div class="bg-white shadow-md rounded-lg p-4 mb-6 w-3/4 mx-auto">
+  <%= form_with(model: [ @post, @comment ], class: "space-y-4") do |form| %>
     <% if @comment.errors.any? %>
-      <div  role="alert">
-        <h2 ><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-        <ul >
+      <div role="alert" class="bg-red-100 border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+        <h2 class="font-bold"><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+        <ul class="list-disc pl-5">
           <% @comment.errors.each do |error| %>
             <li><%= error.full_message %></li>
           <% end %>
@@ -57,15 +62,16 @@
     <% end %>
 
     <div>
-      <%= form.text_area :body, placeholder: "Add your comment here" %>
+      <%= form.text_area :body, placeholder: "Add your comment here", class: "w-full h-24 p-2 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 text-lg" %>
     </div>
 
-    <div >
-      <%= form.submit  %>
+    <div>
+      <%= form.submit class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
     </div>
   <% end %>
 </div>
-<div>
+
+<div class="bg-white shadow-md rounded-lg p-4 mb-6 w-3/4 mx-auto">
   <% @comments.each do |comment| %>
     <%= render 'comments/comment', comment: comment %>
   <% end %>

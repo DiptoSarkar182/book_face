@@ -72,3 +72,4 @@ gem 'paperclip-cloudinary'
 gem "devise", "~> 4.9"
 
 gem 'faker', groups: [:development, :test]
+gem "tailwindcss-rails", "~> 2.4"

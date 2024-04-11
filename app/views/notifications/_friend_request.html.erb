@@ -1,9 +1,7 @@
-<div>
-  <%= friend_request.sender.full_name %>
-</div>
-<div>
-  <%= button_to "Accept", accept_friend_request_path(friend_request.sender), method: :post %>
-</div>
-<div>
-  <%= button_to "Reject", reject_friend_request_path(friend_request.sender), method: :post %>
+<div class="border-b border-gray-200 py-4">
+  <p class="text-md mb-2"><%= friend_request.sender.full_name %></p>
+  <div class="flex items-center space-x-2">
+    <%= button_to "Accept", accept_friend_request_path(friend_request.sender), method: :post, class: "bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded text-lg cursor-pointer" %>
+    <%= button_to "Reject", reject_friend_request_path(friend_request.sender), method: :post, class: "bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded text-lg cursor-pointer" %>
+  </div>
 </div>

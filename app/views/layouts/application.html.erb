@@ -5,59 +5,57 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
     <%= favicon_link_tag "icons8-social-network-96.png" %>
   </head>
 
-  <body>
-  <h1 >
-    <%= link_to 'Book Face', root_path %>
-  </h1>
-  <div>
-    <% if !user_signed_in? %>
-    <% else %>
-      <div>
-        <div>
-          <%= "Currently signed in as: #{current_user.full_name}" %>
-        </div>
-        <div>
-          <%= image_tag(current_user.profile_image.attached? ? current_user.profile_image : 'default_pic.png') %>
-        </div>
-        <div>
-          <%= link_to "Edit account", edit_user_registration_path %>
-        </div>
-        <div>
-          <%= link_to "Profile", users_profile_path(current_user) %>
-        </div>
-        <div>
-          <%= link_to "Friends", friend_requests_path %>
-        </div>
-        <div>
-          <%= link_to "Notifications (#{current_user.received_friend_requests.count})", notifications_path %>
-        </div>
-        <div>
-          <%= link_to "Friends List", friends_list_index_path %>
-        </div>
-        <div>
-          <%= button_to "Log Out", destroy_user_session_url, method: "delete" %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <% if alert || notice %>
-    <div >
-      <div >
-        <% if notice %>
-          <p  role="alert"><%= notice %></p>
-        <% end %>
-        <% if alert %>
-          <p  role="alert"><%= alert %></p>
+  <body class="bg-gray-100 font-sans">
+  <header class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-gray-900">
+          <%= link_to 'Book Face', root_path %>
+        </h1>
+        <% if user_signed_in? %>
+          <div class="flex items-center space-x-4">
+            <%= link_to "Friends", friend_requests_path, class: "flex items-center space-x-2 text-blue-500 hover:text-blue-600" %>
+            <%= link_to "Notifications (#{current_user.received_friend_requests.count})", notifications_path, class: "flex items-center space-x-2 text-blue-500 hover:text-blue-600" %>
+            <%= link_to "Friends List", friends_list_index_path, class: "flex items-center space-x-2 text-blue-500 hover:text-blue-600" %>
+            <div class="relative" data-controller="dropdown">
+              <button class="flex items-center space-x-2 focus:outline-none" data-action="click->dropdown#toggle">
+                <%= image_tag(current_user.profile_image.attached? ? current_user.profile_image : 'default_pic.png', class: "h-8 w-8 rounded-full") %>
+                <span class="text-gray-700"><%= current_user.full_name %></span>
+                <svg class="h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              </button>
+              <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 hidden" data-dropdown-target="menu">
+                <%= link_to "Edit account", edit_user_registration_path, class: "block px-4 py-2 text-gray-800 hover:bg-gray-100" %>
+                <%= link_to "Profile", users_profile_path(current_user), class: "block px-4 py-2 text-gray-800 hover:bg-gray-100" %>
+                <%= button_to "Log Out", destroy_user_session_url, method: "delete", class: "block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100" %>
+              </div>
+            </div>
+          </div>
         <% end %>
       </div>
     </div>
+  </header>
+
+  <% if alert || notice %>
+    <div class="bg-white shadow-md mx-4 my-4 p-4">
+      <% if notice %>
+        <p class="text-green-500 font-bold" role="alert"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="text-red-500 font-bold" role="alert"><%= alert %></p>
+      <% end %>
+    </div>
   <% end %>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <%= yield %>
+  </main>
   </body>
 </html>
