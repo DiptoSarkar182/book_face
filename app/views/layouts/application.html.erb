@@ -13,7 +13,7 @@
 
   <body>
   <h1 >
-    <%= link_to 'Book Face', root_path, class: 'glow-link' %>
+    <%= link_to 'Book Face', root_path %>
   </h1>
   <div>
     <% if !user_signed_in? %>
@@ -35,7 +35,7 @@
           <%= link_to "Friends", friend_requests_path %>
         </div>
         <div>
-          <%= link_to "Notifications", notifications_path %>
+          <%= link_to "Notifications (#{current_user.received_friend_requests.count})", notifications_path %>
         </div>
         <div>
           <%= link_to "Friends List", friends_list_index_path %>
