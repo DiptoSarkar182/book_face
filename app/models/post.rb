@@ -3,6 +3,7 @@ class Post < ApplicationRecord
 
   validates :body, presence: true, length: { maximum: 500 }
   validates :user, presence: true
+  validate :post_image_size_under_limit
 
   has_many :comments, dependent: :destroy
   has_many :post_likes, dependent: :destroy
@@ -24,5 +25,12 @@ class Post < ApplicationRecord
 
   def post_image_changed?
     post_image.attached? && post_image.attachment.blob_id_changed?
+  end
+
+  def post_image_size_under_limit
+    if post_image.attached? && post_image.blob.byte_size > 5.megabytes
+      post_image.purge
+      errors.add(:post_image, 'is too large (max is 5MB)')
+    end
   end
 end

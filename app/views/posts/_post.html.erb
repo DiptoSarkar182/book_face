@@ -1,7 +1,7 @@
 <div class="bg-white shadow-md rounded-lg p-4 mb-6 w-3/4 mx-auto">
   <div class="flex items-center justify-between mb-2">
     <%= link_to users_profile_path(post.user), class: "flex items-center space-x-2 hover:text-blue-500" do %>
-      <%= image_tag post.user.profile_image, class: "w-8 h-8 rounded-full" %>
+      <%= image_tag post.user.profile_image.present? ? post.user.profile_image : 'default_pic', class: "w-8 h-8 rounded-full" %>
       <span class="font-bold text-sm"><%= post.user.full_name %></span>
     <% end %>
     <span title="<%= post.created_at.strftime('%B %d, %Y %I:%M %p') %>" class="text-gray-500 text-xs">about <%= time_ago_in_words(post.created_at) %> ago</span>
