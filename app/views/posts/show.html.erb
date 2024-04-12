@@ -15,7 +15,7 @@
 
   <% if @post.post_image.attached? %>
     <div class="mb-4">
-      <%= image_tag @post.post_image, class: "w-3/8 rounded-md mx-auto" %>
+      <%= image_tag @post.post_image, class: "max-h-96 w-auto object-cover rounded-md mx-auto" %>
     </div>
   <% end %>
 
