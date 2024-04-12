@@ -1,5 +1,9 @@
 class Post < ApplicationRecord
   belongs_to :user
+
+  validates :body, presence: true, length: { maximum: 500 }
+  validates :user, presence: true
+
   has_many :comments, dependent: :destroy
   has_many :post_likes, dependent: :destroy
   has_many :likers, through: :post_likes, source: :user

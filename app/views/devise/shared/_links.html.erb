@@ -1,14 +1,22 @@
-<%- if controller_name != 'sessions' %>
-  <%= link_to "Log in", new_session_path(resource_name) %><br />
-<% end %>
+<div class="mt-4 flex flex-col items-center justify-center space-y-4">
+  <% if controller_name != 'sessions' %>
+    <div class="text-gray-600">
+      Already have an account?
+      <%= link_to "Sign in here", new_session_path(resource_name), class: "text-blue-500 hover:text-blue-700" %>
+    </div>
+  <% end %>
 
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Sign up", new_registration_path(resource_name) %><br />
-<% end %>
+  <% if devise_mapping.registerable? && controller_name != 'registrations' %>
+    <div class="text-gray-600">
+      Don't have an account?
+      <%= link_to "Sign up here", new_registration_path(resource_name), class: "text-blue-500 hover:text-blue-700" %>
+    </div>
+  <% end %>
 
-<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
-<% end %>
+
+<%#- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+<!--  <%#= link_to "Forgot your password?", new_password_path(resource_name) %><br />-->
+<%# end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
   <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
@@ -18,8 +26,14 @@
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
 <% end %>
 
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %><br />
+<%#- if devise_mapping.omniauthable? %>
+<%#- resource_class.omniauth_providers.each do |provider| %>
+<!--    <%#= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "bg-gray-800 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-700" %><br />-->
+<%# end %>
+  <% if devise_mapping.omniauthable? %>
+    <% resource_class.omniauth_providers.each do |provider| %>
+      <% provider_name = provider == :google_oauth2 ? 'Google' : OmniAuth::Utils.camelize(provider) %>
+      <%= button_to "#{action} with #{provider_name}", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded" %>
+    <% end %>
   <% end %>
-<% end %>
+</div>

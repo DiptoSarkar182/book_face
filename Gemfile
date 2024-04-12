@@ -73,3 +73,8 @@ gem "devise", "~> 4.9"
 
 gem 'faker', groups: [:development, :test]
 gem "tailwindcss-rails", "~> 2.4"
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-google-oauth2'
+gem "letter_opener", group: :development
