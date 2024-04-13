@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  <style>
+      @import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css');
+  </style>
+</head>
+<body class="bg-gray-100 p-6">
+<div class="bg-white p-8 rounded-lg shadow-md">
+  <h1 class="text-3xl font-bold mb-4 text-blue-500">Welcome to Book Face, <%= @user.full_name %></h1>
+  <p class="mb-4">
+    You have successfully signed up to Book Face, your email is: <span class="text-gray-700 font-bold"><%= @user.email %></span>.<br>
+  </p>
+  <p class="mb-4">
+    To login to the site, just follow this <a href="<%= @url %>" class="text-blue-500 hover:underline">link</a>.
+  </p>
+  <p class="mb-0 text-gray-500">Thanks for joining and have a great day!</p>
+</div>
+</body>
+</html>

@@ -42,7 +42,7 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
       if user.new_record?
         user.save!
-        # UserMailer.with(user: user).welcome_email.deliver_later
+        UserMailer.with(user: user).welcome_email.deliver_later
       end
     end
   end
