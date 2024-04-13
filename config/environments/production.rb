@@ -97,7 +97,7 @@ Rails.application.configure do
   # Store files on cloudinary.
   config.active_storage.service = :cloudinary
 
-  config.action_mailer.default_url_options = { :host => 'https://book-face.onrender.com/' }
+  #config.action_mailer.default_url_options = { :host => 'https://book-face.onrender.com/' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: 'smtp.elasticemail.com',
