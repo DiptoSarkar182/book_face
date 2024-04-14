@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Book Face is a social media application built with Ruby on Rails. It is a clone of popular social media platforms, featuring core functionalities such as user authentication, profiles, posts, following, liking, and commenting.
+Book Face is a social media application built with Ruby on Rails. It is a clone of popular social media 
+platforms, featuring core functionalities such as user authentication, profiles, posts, 
+adding friends, liking, and commenting.
 
 ## Live Demo
 
