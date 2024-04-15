@@ -24,6 +24,10 @@ User can also use google sign in.
 request if they are not already in the friend list. User can also accept or reject friend requests.
 - **Email Notifications:** Action mailer sends a welcome email when a new user signs up.
 
+## Screenshots
+
+![SS1](./app/assets/images/ss1.PNG)
+
 
 ## Future Features
 
