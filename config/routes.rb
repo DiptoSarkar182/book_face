@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => {registrations: 'registrations',
-                                      omniauth_callbacks: 'callbacks'}
+                                      omniauth_callbacks: 'callbacks',
+                                      passwords: 'passwords'}
 
   get "up" => "rails/health#show", as: :rails_health_check
 

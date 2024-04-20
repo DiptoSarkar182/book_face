@@ -14,9 +14,9 @@
   <% end %>
 
 
-<%#- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-<!--  <%#= link_to "Forgot your password?", new_password_path(resource_name) %><br />-->
-<%# end %>
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+<%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-blue-500 hover:text-blue-700 hover:underline font-semibold" %>
+<% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
   <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
@@ -30,10 +30,11 @@
 <%#- resource_class.omniauth_providers.each do |provider| %>
 <!--    <%#= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "bg-gray-800 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-700" %><br />-->
 <%# end %>
+
   <% if devise_mapping.omniauthable? %>
     <% resource_class.omniauth_providers.each do |provider| %>
       <% provider_name = provider == :google_oauth2 ? 'Google' : OmniAuth::Utils.camelize(provider) %>
-      <%= button_to "#{action} with #{provider_name}", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded" %>
+      <%= button_to "Sign in with #{provider_name}", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded" %>
     <% end %>
   <% end %>
 </div>
