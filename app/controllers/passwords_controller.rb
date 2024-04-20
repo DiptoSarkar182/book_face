@@ -7,4 +7,12 @@ class PasswordsController < Devise::PasswordsController
     end
     super
   end
+
+  def update
+    super do |resource|
+      if resource.previous_changes.keys.include?('encrypted_password')
+        Devise::Mailer.password_change(resource).deliver_later
+      end
+    end
+  end
 end

@@ -8,6 +8,14 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def update
+    super do |resource|
+      if resource.previous_changes.keys.include?('encrypted_password')
+        Devise::Mailer.password_change(resource).deliver_later
+      end
+    end
+  end
+
   private
 
   def sign_up_params
