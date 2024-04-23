@@ -1,7 +1,7 @@
 <div class="bg-white shadow-md rounded-lg p-4 mb-6 w-3/4 mx-auto">
   <div class="flex items-center justify-between mb-2">
     <span class="font-bold text-sm"><%= post.user.full_name %></span>
-    <span title="<%= post.created_at.strftime('%B %d, %Y %I:%M %p') %>" class="text-gray-500 text-xs">about <%= time_ago_in_words(post.created_at) %> ago</span>
+    <span title="<%= post.created_at.strftime('%B %d, %Y %I:%M %p') %>" class="text-gray-500 text-xs"> <%= time_ago_in_words(post.created_at) %> ago</span>
   </div>
 
   <div class="mb-4">

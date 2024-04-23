@@ -1,0 +1,23 @@
+<!--<div>-->
+<!--  <%#= current_user.full_name %>'s Inbox-->
+<!--</div>-->
+
+<!--<div>-->
+  <%# @inbox_friends.each do |inbox_friend| %>
+    <%#= render 'inbox/inbox_friend', inbox_friend: inbox_friend %>
+  <%# end %>
+<!--</div>-->
+
+
+
+<div>
+  <%= current_user.full_name %>'s Inbox
+</div>
+
+<div>
+  <% @inbox_friends.each do |inbox_friend| %>
+    <%= render 'inbox/inbox_friend', inbox_friend: inbox_friend %>
+  <% end %>
+</div>
+
+<%= turbo_frame_tag "message_frame" %>

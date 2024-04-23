@@ -26,7 +26,13 @@ Rails.application.routes.draw do
       get :search_friend
     end
   end
+
   resources :notifications
+
   resources :friends_list, only: [:index, :destroy]
-  # resources :search_friends, only: [:search]
+
+  resources :inbox do
+    resources :messages
+  end
+
 end

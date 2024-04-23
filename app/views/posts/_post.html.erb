@@ -4,7 +4,7 @@
       <%= image_tag post.user.profile_image.present? ? post.user.profile_image : 'default_pic.png', class: "w-8 h-8 rounded-full" %>
       <span class="font-bold text-sm"><%= post.user.full_name %></span>
     <% end %>
-    <span title="<%= post.created_at.strftime('%B %d, %Y %I:%M %p') %>" class="text-gray-500 text-xs">about <%= time_ago_in_words(post.created_at) %> ago</span>
+    <span title="<%= post.created_at.strftime('%B %d, %Y %I:%M %p') %>" class="text-gray-500 text-xs"><%= time_ago_in_words(post.created_at) %> ago</span>
   </div>
 
   <div class="mb-4">

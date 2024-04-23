@@ -25,6 +25,7 @@
             <%= link_to "Friends", friend_requests_path, class: "flex items-center space-x-2 text-blue-500 hover:text-blue-600" %>
             <%= link_to "Notifications (#{current_user.received_friend_requests.count})", notifications_path, class: "flex items-center space-x-2 text-blue-500 hover:text-blue-600" %>
             <%= link_to "Friends List", friends_list_index_path, class: "flex items-center space-x-2 text-blue-500 hover:text-blue-600" %>
+            <%= link_to "Inbox", inbox_index_path, class: "flex items-center space-x-2 text-blue-500 hover:text-blue-600" %>
             <div class="relative" data-controller="dropdown">
               <button class="flex items-center space-x-2 focus:outline-none" data-action="click->dropdown#toggle">
                 <%= image_tag(current_user.profile_image.attached? ? current_user.profile_image : 'default_pic.png', class: "h-8 w-8 rounded-full") %>

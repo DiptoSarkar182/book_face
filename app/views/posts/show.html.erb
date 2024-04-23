@@ -6,7 +6,7 @@
         <span class="font-bold text-sm"><%= @post.user.full_name %></span>
       <% end %>
     </div>
-    <span title="<%= @post.created_at.strftime('%B %d, %Y %I:%M %p') %>" class="text-gray-500 text-xs">about <%= time_ago_in_words(@post.created_at) %> ago</span>
+    <span title="<%= @post.created_at.strftime('%B %d, %Y %I:%M %p') %>" class="text-gray-500 text-xs"><%= time_ago_in_words(@post.created_at) %> ago</span>
   </div>
 
   <div class="mb-4">

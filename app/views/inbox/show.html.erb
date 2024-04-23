@@ -1,0 +1,65 @@
+<!--<div>-->
+  <%# @messages.each do |message| %>
+<!--    <div>-->
+<!--      <span title="<%#= message.created_at.strftime('%B %d, %Y %I:%M %p') %>"><%#= time_ago_in_words(message.created_at) %> ago</span>-->
+<!--      <%#= message.sender.full_name %>:-->
+      <%#= message.content %>
+<!--    </div>-->
+  <%# end %>
+<!--</div>-->
+
+<!--<div >-->
+  <%#= form_with(model: @message, url: inbox_messages_path(params[:id])) do |form| %>
+    <%# if @message.errors.any? %>
+<!--      <div role="alert">-->
+<!--        <h2 ><%#= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>-->
+<!--        <ul >-->
+          <%# @message.errors.each do |error| %>
+<!--            <li><%#= error.full_message %></li>-->
+          <%# end %>
+<!--        </ul>-->
+<!--      </div>-->
+    <%# end %>
+<!--    <div>-->
+      <%#= form.text_area :content, placeholder: "Type your message" %>
+<!--    </div>-->
+
+<!--    <div>-->
+      <%#= form.submit "Send Message" %>
+<!--    </div>-->
+  <%# end %>
+<!--</div>-->
+
+<%= turbo_frame_tag "message_frame" do %>
+  <div>
+    <div> Chatting with <%= @chatting_with.full_name %></div>
+    <% @messages.each do |message| %>
+      <div>
+        <span title="<%= message.created_at.strftime('%B %d, %Y %I:%M %p') %>"><%= time_ago_in_words(message.created_at) %> ago</span>
+        <%= message.sender.full_name %>:
+        <%= message.content %>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form_with(model: @message, url: inbox_messages_path(params[:id])) do |form| %> <% if @message.errors.any? %>
+        <div role="alert">
+          <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+          <ul>
+            <% @message.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div>
+        <%= form.text_area :content, placeholder: "Type your message" %>
+      </div>
+
+      <div>
+        <%= form.submit "Send Message" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

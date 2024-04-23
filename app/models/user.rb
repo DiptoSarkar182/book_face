@@ -23,6 +23,8 @@ class User < ApplicationRecord
   has_many :received_friend_requests, class_name: 'FriendRequest', foreign_key: 'receiver_id', dependent: :destroy
   has_many :friend_lists, dependent: :destroy
   has_many :friends, through: :friend_lists
+  has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id', dependent: :destroy
+  has_many :received_messages, class_name: 'Message', foreign_key: 'receiver_id', dependent: :destroy
   has_one_attached :profile_image
 
   before_destroy :purge_profile_image
