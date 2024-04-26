@@ -13,7 +13,7 @@
     <%= favicon_link_tag "icons8-social-network-96.png" %>
   </head>
 
-  <body class="bg-gray-100 font-sans">
+  <body class="bg-gray-100 font-sans" data-user-id="<%= current_user.id if user_signed_in? %>">
   <header class="bg-white shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       <div class="flex items-center justify-between">

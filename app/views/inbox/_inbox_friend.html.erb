@@ -1,7 +1,16 @@
 <!--<div>-->
-  <%#= link_to inbox_friend.full_name, inbox_path(inbox_friend) %>
+  <%#= link_to inbox_friend.full_name, inbox_path(inbox_friend), data: { turbo_frame: 'message_frame', turbo_action: 'replace' } %>
+<!--</div>-->
+
+<!--<div>-->
+  <%#= link_to inbox_friend.full_name, inbox_path(inbox_friend), data: { turbo_frame: 'message_frame', turbo_action: 'replace' } %>
 <!--</div>-->
 
 <div>
-  <%= link_to inbox_friend.full_name, inbox_path(inbox_friend), data: { turbo_frame: 'message_frame', turbo_action: 'replace' } %>
+  <%= link_to inbox_friend.full_name, inbox_path(inbox_friend), data: {
+    turbo_frame: 'message_frame',
+    turbo_action: 'replace',
+    inbox_id: inbox_friend.id
+  }  %>
+  <input type="hidden" id="inboxId" value="<%= inbox_friend.id %>">
 </div>

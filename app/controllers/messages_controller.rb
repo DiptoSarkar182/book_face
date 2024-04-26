@@ -5,6 +5,14 @@ class MessagesController < ApplicationController
     @message.receiver_id = params[:inbox_id]
 
     if @message.save
+      #ActionCable.server.broadcast("message_#{conversation_identifier}", @message.as_json(include: :sender).merge(conversation: conversation_identifier))
+      ActionCable.server.broadcast("message_#{conversation_identifier}",
+                                   @message.as_json(include: :sender).merge(
+                                     conversation: conversation_identifier,
+                                     sender_name: @message.sender.full_name,
+                                     timestamp: @message.created_at.strftime('%B %d, %Y %I:%M %p')
+                                   )
+      )
       redirect_to inbox_path(params[:inbox_id])
     else
       @messages = Message.where(sender_id: current_user.id, receiver_id: params[:inbox_id])
@@ -17,5 +25,9 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:content)
+  end
+
+  def conversation_identifier
+    [current_user.id.to_s, params[:inbox_id]].sort.join("_")
   end
 end
