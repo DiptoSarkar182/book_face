@@ -1,16 +1,8 @@
-<!--<div>-->
-  <%#= link_to inbox_friend.full_name, inbox_path(inbox_friend), data: { turbo_frame: 'message_frame', turbo_action: 'replace' } %>
-<!--</div>-->
-
-<!--<div>-->
-  <%#= link_to inbox_friend.full_name, inbox_path(inbox_friend), data: { turbo_frame: 'message_frame', turbo_action: 'replace' } %>
-<!--</div>-->
-
-<div>
+<div class="flex items-center py-2 hover:bg-gray-200 rounded-md cursor-pointer">
   <%= link_to inbox_friend.full_name, inbox_path(inbox_friend), data: {
     turbo_frame: 'message_frame',
     turbo_action: 'replace',
     inbox_id: inbox_friend.id
-  }  %>
+  }, class: "flex-grow font-medium text-gray-700" %>
   <input type="hidden" id="inboxId" value="<%= inbox_friend.id %>">
 </div>

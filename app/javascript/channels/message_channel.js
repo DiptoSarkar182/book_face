@@ -45,21 +45,21 @@ function createSubscription(userId, inboxId) {
             let currentConversationId = [userId, inboxId].sort().join("_");
             if (data.conversation === currentConversationId) {
                 const messageDisplay = document.querySelector('#message-display');
-                messageDisplay.insertAdjacentHTML('beforeend', this.template(data));
+                messageDisplay.insertAdjacentHTML('beforeend', this.template(data, userId));
             }
         },
 
-        template(data) {
+        template(data, userId) {
             let timestamp = new Date(data.timestamp);
             let relativeTimestamp = timeAgo(timestamp);
+            let messageColor = data.sender_id == userId ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700';
+            let textColor = data.sender_id == userId ? 'text-white' : 'text-gray-500';
+            let textAlign = data.sender_id == userId ? 'text-right' : 'text-left';
 
-            return `<article class="message">
-        <div>
-          <span title="${data.timestamp}">${relativeTimestamp}</span>
-          ${data.sender_name}:
-          ${data.content}
-        </div>
-      </article>`;
+            return `<div class="flex-grow overflow-y-auto p-4 ${textAlign}">
+               <div class="inline-block ${messageColor} rounded-md py-1 px-2 max-w-lg" style="text-align: justify;">
+               <pre class="word-break-keep-all" style="overflow-wrap: break-word; white-space: pre-wrap;">${data.content}</pre>
+               <span class="text-xs ${textColor} block " title="${data.timestamp}">${relativeTimestamp}</span>`;
         }
     });
 

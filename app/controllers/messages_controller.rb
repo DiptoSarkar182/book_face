@@ -10,6 +10,7 @@ class MessagesController < ApplicationController
                                    @message.as_json(include: :sender).merge(
                                      conversation: conversation_identifier,
                                      sender_name: @message.sender.full_name,
+                                     sender_id: @message.sender.id,
                                      timestamp: @message.created_at.strftime('%B %d, %Y %I:%M %p')
                                    )
       )
