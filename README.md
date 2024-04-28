@@ -4,7 +4,7 @@
 
 Book Face is a social media application built with Ruby on Rails. It is a clone of popular social media 
 platforms, featuring core functionalities such as user authentication, profiles, posts, 
-adding friends, liking, and commenting.
+adding friends,real time chatting, liking, and commenting.
 
 ## Live Demo
 
@@ -15,24 +15,29 @@ Please note that the app is hosted on a free tier and may take a moment to load 
 
 - **User Authentication:** Implemented with Devise gem. Users must sign in to see anything except the sign-in page.
 User can also use google sign in.
-- **User Profiles:** Users can create a profile with a profile picture. The profile page contains their profile information, profile photo, and posts.
+- **User Profiles:** Users can create a profile with a profile picture. The profile page contains their profile 
+information, profile photo, and posts.
 - **Friends:** Users can send friend requests to other users.
 - **Posts:** Users can create posts with or without adding images. Each post displays the content, author, comments, and likes.
 - **Likes and Comments:** Users can like posts and comment on them.
+- **Chatting:** Users can chat only with their added friends in real time.
 - **Newsfeed:** An index page for posts shows all recent posts from the current user and users they are friends with.
 - **User Index:** An index page for users shows all users and buttons for sending friend requests and cancel 
 request if they are not already in the friend list. User can also accept or reject friend requests.
-- **Email Notifications:** Action mailer sends a welcome email when a new user signs up.
+- **Email Notifications:** Action mailer sends a welcome email when a new user signs up. Users can also reset their 
+password.
 
 ## Screenshots
 
 ![SS1](./app/assets/images/ss1.PNG)
+![SS2](./app/assets/images/ss2.PNG)
+![GIF1](./app/assets/images/chatting_gif.gif)
 
 
 ## Future Features
 
 - Real-time updates for newsfeed and notifications
-- Real-time chatting between users
+- ~~Real-time chatting between users~~
 - Users can create group chat
 
 ## Getting Started

@@ -18,7 +18,8 @@ class MessagesController < ApplicationController
     else
       @messages = Message.where(sender_id: current_user.id, receiver_id: params[:inbox_id])
                          .or(Message.where(sender_id: params[:inbox_id], receiver_id: current_user.id))
-      render 'inbox/show'
+      @chatting_with = User.find(params[:inbox_id])
+      redirect_to inbox_path(params[:inbox_id]), status: :unprocessable_entity
     end
   end
 

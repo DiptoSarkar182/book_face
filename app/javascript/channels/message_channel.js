@@ -29,8 +29,8 @@ function createSubscription(userId, inboxId) {
     // Store the new subscription in the map
     let subscription = consumer.subscriptions.create({ channel: "MessageChannel", conversation: conversationId }, {
         connected() {
-            console.log(`current user id: ${userId}`);
-            console.log(`inbox id: ${inboxId}`);
+            // console.log(`current user id: ${userId}`);
+            // console.log(`inbox id: ${inboxId}`);
         },
 
         disconnected() {
@@ -39,9 +39,13 @@ function createSubscription(userId, inboxId) {
 
         received(data) {
             // Called when there's incoming data on the websocket for this channel
-            console.log(data);
+            // console.log(data);
 
             // Check if the message belongs to the current conversation
+            const initialMessage = document.getElementById('initial-message');
+            if (initialMessage) {
+                initialMessage.remove();
+            }
             let currentConversationId = [userId, inboxId].sort().join("_");
             if (data.conversation === currentConversationId) {
                 const messageDisplay = document.querySelector('#message-display');
