@@ -2,13 +2,13 @@
 
 ## Introduction
 
-Book Face is a social media application built with Ruby on Rails. It is a clone of popular social media 
-platforms, featuring core functionalities such as user authentication, profiles, posts, 
-adding friends,real time chatting, liking, and commenting.
+Book Face is a social media application built with Ruby on Rails. It is inspired by popular social media platforms, 
+featuring core functionalities such as user authentication, profiles, posts, 
+adding friends, real time chatting, liking, and commenting.
 
 ## Live Demo
 
-You can see a live version of the app [here](https://book-face.onrender.com).
+You can see a live version of the app **[here](https://book-face.onrender.com)**.
 Please note that the app is hosted on a free tier and may take a moment to load if it has been inactive.
 
 ## Features
@@ -27,6 +27,18 @@ request if they are not already in the friend list. User can also accept or reje
 - **Email Notifications:** Action mailer sends a welcome email when a new user signs up. Users can also reset their 
 password.
 
+## Technology Used
+- Ruby on Rails
+- Hotwire
+- PostgreSQL
+- Devise
+- Action Cable
+- Action Mailer
+- Active Storage
+- TailwindCSS
+- Redis
+- Cloudinary
+
 ## Screenshots
 
 ![SS1](./app/assets/images/ss1.PNG)
@@ -37,7 +49,6 @@ password.
 ## Future Features
 
 - Real-time updates for newsfeed and notifications
-- ~~Real-time chatting between users~~
 - Users can create group chat
 
 ## Getting Started
