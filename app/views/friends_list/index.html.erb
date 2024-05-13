@@ -1,6 +1,13 @@
-<div class="bg-white shadow-md rounded-lg p-4 mb-6 w-3/4 mx-auto">
+<div class="bg-white shadow-md rounded-lg p-4 mb-6 w-3/4 mx-auto overflow-auto" style="min-height: 100px; max-height: 500px;">
   <h2 class="text-lg font-bold mb-4"><%= current_user.full_name %>'s Friend's List</h2>
   <% @friends.each do |friend| %>
     <%= render 'friends_list/friend', friend: friend %>
+  <% end %>
+</div>
+
+<div class="bg-white shadow-md rounded-lg p-4 mb-6 w-3/4 mx-auto overflow-auto" style="height: 500px;">
+  <h2 class="text-lg font-bold mb-4">People You May Know</h2>
+  <% @users.each do |user| %>
+    <%= render 'friend_requests/user', user: user %>
   <% end %>
 </div>

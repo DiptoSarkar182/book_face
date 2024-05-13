@@ -2,7 +2,7 @@
   <turbo-frame id="like_button">
     <% if post.likers.exists?(current_user.id) %>
       <%= button_to dislike_post_path(post), method: :post, class: "flex items-center space-x-2 text-gray-500 hover:text-red-500" do %>
-        <%= image_tag "dislike.png", alt: "Dislike", class: "h-5 w-5" %>
+        <%= image_tag "like.png", alt: "Dislike", class: "h-5 w-5 transform rotate-180" %>
         <span><%= post.post_likes.count %></span>
       <% end %>
     <% else %>

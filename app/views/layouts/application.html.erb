@@ -17,12 +17,17 @@
   <header class="bg-white shadow-md" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       <div class="flex items-center justify-between">
-        <h1 class="text-2xl font-bold text-gray-900">
-          <%= link_to 'Book Face', root_path, class: "transition duration-200 ease-in-out hover:text-blue-600" %>
-        </h1>
+        <div class="flex items-center space-x-4">
+          <h1 class="text-2xl font-bold text-gray-900">
+            <%= link_to 'Book Face', root_path, class: "transition duration-200 ease-in-out hover:text-blue-600" %>
+          </h1>
+          <%= form_with url: search_friend_friend_requests_path, method: :get, class: "flex items-center space-x-2" do |form| %>
+            <%= form.text_field :name, placeholder: "Search users", required: true, class: "w-full p-2 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 text-lg" %>
+            <%= form.submit "Search", class: "hidden" %>
+          <% end %>
+        </div>
         <% if user_signed_in? %>
           <div class="flex items-center space-x-4">
-            <%= link_to "Friends", friend_requests_path, class: "flex items-center space-x-2 text-blue-500 hover:text-blue-600" %>
             <%= link_to "Notifications (#{current_user.received_friend_requests.count})", notifications_path, class: "flex items-center space-x-2 text-blue-500 hover:text-blue-600" %>
             <%= link_to "Friends List", friends_list_index_path, class: "flex items-center space-x-2 text-blue-500 hover:text-blue-600" %>
             <%= link_to "Inbox", inbox_index_path, class: "flex items-center space-x-2 text-blue-500 hover:text-blue-600" %>
