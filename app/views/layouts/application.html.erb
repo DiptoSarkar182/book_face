@@ -50,7 +50,7 @@
   </header>
 
   <% if alert || notice %>
-    <div class="bg-white shadow-md mx-4 p-4" style="margin-top: 70px;">
+    <div data-controller="flash" class="bg-white shadow-md mx-4 p-4" style="margin-top: 70px;">
       <% if notice %>
         <p class="text-green-500 font-bold" role="alert"><%= notice %></p>
       <% end %>

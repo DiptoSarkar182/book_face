@@ -67,3 +67,5 @@ You need to have Ruby and Rails installed on your machine. See [this guide](http
 4. Set up the database: `rails db:create db:migrate`
 5. Start the server: `rails server`
 6. Visit `http://localhost:3000/` in your browser to access the application.
+
+<a target="_blank" href="https://icons8.com/icon/37975/love">Love</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
