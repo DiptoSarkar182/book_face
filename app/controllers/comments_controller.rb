@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+  before_action :check_owner, only: [:edit, :update, :destroy]
+
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build(comment_params)
@@ -8,6 +10,7 @@ class CommentsController < ApplicationController
       if @comment.save
         format.html {redirect_to @post, notice: "Comment created successfully"}
       else
+        @comments = @post.comments.order(created_at: :desc)
         format.html {render 'posts/show', status: :unprocessable_entity}
       end
     end
@@ -33,8 +36,19 @@ class CommentsController < ApplicationController
     @comment.destroy
     redirect_to @post, notice: "Comment deleted successfully"
   end
+
   private
+
   def comment_params
     params.require(:comment).permit(:body)
   end
+
+  def check_owner
+    @post = Post.find(params[:post_id])
+    @comment = Comment.find(params[:id])
+    unless @comment.user == current_user
+      redirect_to @post, alert: "You're not authorized to perform this action"
+    end
+  end
+
 end

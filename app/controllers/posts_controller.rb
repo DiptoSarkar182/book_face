@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+
+  before_action :check_owner, only: [:edit, :update, :destroy]
+
   def index
     @posts = Post.where(user_id: [current_user.id, *current_user.friends.select(:id)]).order('created_at DESC')
   end
@@ -59,8 +62,18 @@ class PostsController < ApplicationController
       redirect_to root_path, alert: 'Unable to dislike this post.'
     end
   end
+
   private
+
   def post_params
     params.require(:post).permit(:body, :post_image)
   end
+
+  def check_owner
+    @post = Post.find(params[:id])
+    unless @post.user == current_user
+      redirect_to @post, alert: "You're not authorized to perform this action"
+    end
+  end
+
 end
