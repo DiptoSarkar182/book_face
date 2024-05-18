@@ -21,9 +21,11 @@
           <h1 class="text-2xl font-bold text-gray-900">
             <%= link_to 'Book Face', root_path, class: "transition duration-200 ease-in-out hover:text-blue-600" %>
           </h1>
-          <%= form_with url: search_friend_friend_requests_path, method: :get, class: "flex items-center space-x-2" do |form| %>
-            <%= form.text_field :name, placeholder: "Search users", required: true, class: "w-full p-2 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 text-lg" %>
-            <%= form.submit "Search", class: "hidden" %>
+          <% if user_signed_in? %>
+            <%= form_with url: search_friend_friend_requests_path, method: :get, class: "flex items-center space-x-2" do |form| %>
+              <%= form.text_field :name, placeholder: "Search users", required: true, class: "w-full p-2 border-blue-400 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 text-lg" %>
+              <%= form.submit "Search", class: "hidden" %>
+            <% end %>
           <% end %>
         </div>
         <% if user_signed_in? %>

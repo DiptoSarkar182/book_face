@@ -14,6 +14,7 @@ class User < ApplicationRecord
   validates :bio, length: { maximum: 500 }
   validates :location, length: { maximum: 100 }
   validate :profile_image_size_under_limit
+  validate :profile_image_must_be_image
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -70,10 +71,19 @@ class User < ApplicationRecord
   def destroy_friend_lists
     FriendList.where(friend: self).destroy_all
   end
+
   def profile_image_size_under_limit
     if profile_image.attached? && profile_image.blob.byte_size > 5.megabytes
       profile_image.purge
       errors.add(:profile_image, 'is too large (max is 5MB)')
     end
   end
+
+  def profile_image_must_be_image
+    if profile_image.attached? && !profile_image.content_type.start_with?('image/')
+      profile_image.purge
+      errors.add(:profile_image, 'must be an image file')
+    end
+  end
+
 end
