@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_19_175515) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_21_080641) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_19_175515) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.text "body"
+    t.text "body", null: false
     t.bigint "user_id", null: false
     t.bigint "post_id", null: false
     t.datetime "created_at", null: false
@@ -72,7 +72,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_19_175515) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.text "content"
+    t.text "content", null: false
     t.bigint "sender_id", null: false
     t.bigint "receiver_id", null: false
     t.datetime "created_at", null: false
@@ -91,7 +91,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_19_175515) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.text "body"
+    t.text "body", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
