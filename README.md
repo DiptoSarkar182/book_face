@@ -46,11 +46,6 @@ password.
 ![GIF1](./app/assets/images/chatting_gif.gif)
 
 
-## Future Features
-
-- Real-time updates for newsfeed and notifications
-- Users can create group chat
-
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
