@@ -1,0 +1,14 @@
+<div data-controller="previews">
+  <%= form.label :profile_image, "Attach profile photo:(MAX SIZE 5MB)", class: "block text-gray-700 text-sm font-bold mb-2" %>
+  <%= form.file_field :profile_image, accept: 'image/png,image/gif,image/jpeg',
+                      direct_upload: true,
+                      data: {previews_target: "input", action: "change->previews#preview"}, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+
+  <div>
+    <% if user.profile_image.attached? %>
+      <%= image_tag user.profile_image, data: { previews_target: "preview" }, class: "image w-32 h-auto object-contain rounded" %>
+    <% else %>
+      <%= image_tag "", data: { previews_target: "preview" }, class: "image w-32 h-auto object-contain rounded" %>
+    <% end %>
+  </div>
+</div>

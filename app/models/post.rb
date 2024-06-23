@@ -9,9 +9,7 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :post_likes, dependent: :destroy
   has_many :likers, through: :post_likes, source: :user
-  has_one_attached :post_image do |attachable|
-    attachable.variant :thumb, resize_to_fill: [80, 80]
-  end
+  has_one_attached :post_image
 
   before_destroy :purge_post_image
   before_update :purge_post_image, if: :post_image_changed?
